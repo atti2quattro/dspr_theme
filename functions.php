@@ -992,4 +992,3 @@ function fetch_world_news() {
     
     return $news;
 }
-}
