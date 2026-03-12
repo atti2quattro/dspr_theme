@@ -1,0 +1,755 @@
+/* ============================================================
+   BENTO GALLERY UNIFICATA — Mobile First + Desktop
+   Layout unificato zona2 + zona1 seguendo mockup
+   ============================================================ */
+
+/* Import font Inter */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
+
+/* ============================================================
+   MOBILE FIRST (Default < 768px)
+   ============================================================ */
+
+.dib-bento-unified {
+    padding: 24px 16px;
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+.dib-bento-unified__label {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 20px;
+}
+
+.dib-bento-unified__dot {
+    width: 8px;
+    height: 8px;
+    background: #d32f2f;
+    border-radius: 50%;
+    animation: pulse-zona2 2s ease-in-out infinite;
+}
+
+@keyframes pulse-zona2 {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.6; transform: scale(1.2); }
+}
+
+.dib-bento-unified__label-text {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    font-size: 13px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: #d32f2f;
+}
+
+/* Griglia Mobile: 2 colonne */
+.dib-bento-unified__grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-auto-rows: 140px;
+    gap: 12px;
+}
+
+/* ============================================================
+   STILI CARD COMUNI
+   ============================================================ */
+
+.dib-bento-item,
+.dib-flash-bento {
+    position: relative;
+    overflow: hidden;
+    border-radius: 16px;
+    text-decoration: none;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.dib-bento-item:active,
+.dib-flash-bento:active {
+    transform: scale(0.98);
+}
+
+.dib-bento-item__bg,
+.dib-flash-bento__bg {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, #0a1628 0%, #1a3a5c 100%);
+    background-size: cover;
+    background-position: center;
+    transition: transform 0.5s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.dib-bento-item__icon {
+    font-size: 40px;
+    opacity: 0.3;
+}
+
+.dib-bento-item__overlay,
+.dib-flash-bento__overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.3) 50%, transparent 100%);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 16px;
+    z-index: 1;
+}
+
+.dib-bento-item__top,
+.dib-flash-bento__top {
+    display: flex;
+    justify-content: flex-start;
+}
+
+.dib-bento-item__cat,
+.dib-flash-bento__cat {
+    background: rgba(255,255,255,0.2);
+    backdrop-filter: blur(10px);
+    padding: 5px 10px;
+    border-radius: 16px;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    font-size: 10px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.3px;
+    color: #fff;
+}
+
+.dib-flash-bento__badge {
+    background: #4caf50;
+    color: #fff;
+    padding: 5px 12px;
+    border-radius: 16px;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    font-size: 10px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.3px;
+    animation: badge-glow 2s ease-in-out infinite;
+}
+
+@keyframes badge-glow {
+    0%, 100% { box-shadow: 0 0 0 rgba(76, 175, 80, 0); }
+    50% { box-shadow: 0 0 16px rgba(76, 175, 80, 0.5); }
+}
+
+.dib-bento-item__bottom,
+.dib-flash-bento__bottom {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.dib-bento-item__title,
+.dib-flash-bento__title {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 1.25;
+    color: #fff;
+    margin: 0;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.dib-bento-item__time,
+.dib-flash-bento__time {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    font-size: 11px;
+    font-weight: 500;
+    color: rgba(255,255,255,0.7);
+}
+
+/* ============================================================
+   LAYOUT MOBILE (Mockup 1 - Verticale)
+   Box 1: grande 2×3 (zona2)
+   Box 2,3: 1×2 (zona2)
+   Box 4: 2×1 (zona2)
+   Box 5,6,7: 1×1 (zona1)
+   Box 8: 2×2 (zona1)
+   ============================================================ */
+
+/* ZONA2 Cards Mobile */
+.dib-bento-item--hero {
+    grid-column: span 2;
+    grid-row: span 3;
+}
+
+.dib-bento-item--hero .dib-bento-item__title {
+    font-size: 22px;
+    -webkit-line-clamp: 4;
+}
+
+.dib-bento-item--hero .dib-bento-item__overlay {
+    padding: 20px;
+}
+
+.dib-bento-item--tall {
+    grid-column: span 1;
+    grid-row: span 2;
+}
+
+.dib-bento-item--wide {
+    grid-column: span 2;
+    grid-row: span 1;
+}
+
+.dib-bento-item--wide .dib-bento-item__title {
+    font-size: 14px;
+    -webkit-line-clamp: 2;
+}
+
+.dib-bento-item--wide-large {
+    grid-column: span 3;
+    grid-row: span 2;
+}
+
+.dib-bento-item--wide-large .dib-bento-item__title {
+    font-size: 20px;
+    -webkit-line-clamp: 3;
+}
+
+.dib-bento-item--medium,
+.dib-bento-item--square,
+.dib-bento-item--compact,
+.dib-bento-item--small,
+.dib-bento-item--featured {
+    grid-column: span 1;
+    grid-row: span 1;
+}
+
+.dib-bento-item--featured {
+    grid-column: span 2;
+    grid-row: span 2;
+}
+
+.dib-bento-item--featured .dib-bento-item__title {
+    font-size: 20px;
+    -webkit-line-clamp: 3;
+}
+
+.dib-bento-item--medium .dib-bento-item__title,
+.dib-bento-item--square .dib-bento-item__title,
+.dib-bento-item--compact .dib-bento-item__title,
+.dib-bento-item--small .dib-bento-item__title {
+    font-size: 13px;
+    -webkit-line-clamp: 2;
+}
+
+/* ZONA1 Cards Mobile */
+.dib-flash-bento--tall {
+    grid-column: span 1;
+    grid-row: span 2;
+}
+
+.dib-flash-bento--tall .dib-flash-bento__title {
+    font-size: 16px;
+    -webkit-line-clamp: 3;
+}
+
+.dib-flash-bento--featured {
+    grid-column: span 2;
+    grid-row: span 2;
+}
+
+.dib-flash-bento--featured .dib-flash-bento__title {
+    font-size: 20px;
+    -webkit-line-clamp: 3;
+}
+
+.dib-flash-bento--featured .dib-flash-bento__overlay {
+    padding: 20px;
+}
+
+.dib-flash-bento--vertical,
+.dib-flash-bento--horizontal,
+.dib-flash-bento--medium,
+.dib-flash-bento--small {
+    grid-column: span 1;
+    grid-row: span 1;
+}
+
+.dib-flash-bento--vertical .dib-flash-bento__title,
+.dib-flash-bento--horizontal .dib-flash-bento__title,
+.dib-flash-bento--medium .dib-flash-bento__title,
+.dib-flash-bento--small .dib-flash-bento__title {
+    font-size: 13px;
+    -webkit-line-clamp: 2;
+}
+
+
+/* ============================================================
+   DESKTOP (> 768px) — Layout Mockup 2
+   ============================================================ */
+
+@media (min-width: 769px) {
+    .dib-bento-unified {
+        padding: 40px 20px;
+    }
+
+    .dib-bento-unified__label {
+        margin-bottom: 24px;
+    }
+
+    .dib-bento-unified__label-text {
+        font-size: 14px;
+    }
+
+    /* Griglia Desktop: 4 colonne */
+    .dib-bento-unified__grid {
+        grid-template-columns: repeat(4, 1fr);
+        grid-auto-rows: 160px;
+        gap: 16px;
+    }
+
+    /* Hover effects su desktop */
+    .dib-bento-item:hover,
+    .dib-flash-bento:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 12px 40px rgba(0,0,0,0.15);
+    }
+
+    .dib-bento-item:hover .dib-bento-item__bg,
+    .dib-flash-bento:hover .dib-flash-bento__bg {
+        transform: scale(1.05);
+    }
+
+    .dib-bento-item__overlay,
+    .dib-flash-bento__overlay {
+        padding: 20px;
+    }
+
+    .dib-bento-item__cat,
+    .dib-flash-bento__cat {
+        font-size: 11px;
+        padding: 6px 12px;
+    }
+
+    .dib-flash-bento__badge {
+        font-size: 11px;
+        padding: 6px 14px;
+    }
+
+    .dib-bento-item__title,
+    .dib-flash-bento__title {
+        font-size: 18px;
+    }
+
+    .dib-bento-item__time,
+    .dib-flash-bento__time {
+        font-size: 12px;
+    }
+
+    /* ============================================================
+       LAYOUT DESKTOP (Mockup 2)
+       Box 1 (zona2): 2×3
+       Box 2 (zona2): 1×2
+       Box 3 (zona2): 2×1
+       Box 4 (zona2): 2×2
+       Box 5,6,7 (zona1): 1×1
+       Box 8 (zona1): 2×2
+       ============================================================ */
+
+    /* ZONA2 Desktop */
+    .dib-bento-item--hero {
+        grid-column: span 2;
+        grid-row: span 3;
+    }
+
+    .dib-bento-item--hero .dib-bento-item__title {
+        font-size: 28px;
+        -webkit-line-clamp: 4;
+    }
+
+    .dib-bento-item--tall {
+        grid-column: span 1;
+        grid-row: span 2;
+    }
+
+    .dib-bento-item--tall .dib-bento-item__title {
+        font-size: 18px;
+        -webkit-line-clamp: 3;
+    }
+
+    .dib-bento-item--wide {
+        grid-column: span 2;
+        grid-row: span 1;
+    }
+
+    .dib-bento-item--wide .dib-bento-item__title {
+        font-size: 16px;
+        -webkit-line-clamp: 2;
+    }
+
+    .dib-bento-item--wide-large {
+        grid-column: span 3;
+        grid-row: span 2;
+    }
+
+    .dib-bento-item--wide-large .dib-bento-item__title {
+        font-size: 22px;
+        -webkit-line-clamp: 3;
+    }
+
+    .dib-bento-item--medium {
+        grid-column: span 2;
+        grid-row: span 2;
+    }
+
+    .dib-bento-item--medium .dib-bento-item__title {
+        font-size: 22px;
+        -webkit-line-clamp: 3;
+    }
+
+    .dib-bento-item--featured {
+        grid-column: span 2;
+        grid-row: span 2;
+    }
+
+    .dib-bento-item--featured .dib-bento-item__title {
+        font-size: 22px;
+        -webkit-line-clamp: 3;
+    }
+
+    .dib-bento-item--square,
+    .dib-bento-item--small {
+        grid-column: span 1;
+        grid-row: span 1;
+    }
+
+    .dib-bento-item--square .dib-bento-item__title,
+    .dib-bento-item--small .dib-bento-item__title {
+        font-size: 14px;
+        -webkit-line-clamp: 2;
+    }
+
+    .dib-bento-item--compact {
+        grid-column: span 1;
+        grid-row: span 1;
+    }
+
+    .dib-bento-item--compact .dib-bento-item__title {
+        font-size: 14px;
+        -webkit-line-clamp: 2;
+    }
+
+    /* ZONA1 Desktop */
+    .dib-flash-bento--tall {
+        grid-column: span 1;
+        grid-row: span 2;
+    }
+
+    .dib-flash-bento--tall .dib-flash-bento__title {
+        font-size: 18px;
+        -webkit-line-clamp: 3;
+    }
+
+    .dib-flash-bento--featured {
+        grid-column: span 2;
+        grid-row: span 2;
+    }
+
+    .dib-flash-bento--featured .dib-flash-bento__title {
+        font-size: 24px;
+        -webkit-line-clamp: 4;
+    }
+
+    .dib-flash-bento--vertical,
+    .dib-flash-bento--horizontal,
+    .dib-flash-bento--medium,
+    .dib-flash-bento--small {
+        grid-column: span 1;
+        grid-row: span 1;
+    }
+
+    .dib-flash-bento--vertical .dib-flash-bento__title,
+    .dib-flash-bento--horizontal .dib-flash-bento__title,
+    .dib-flash-bento--medium .dib-flash-bento__title,
+    .dib-flash-bento--small .dib-flash-bento__title {
+        font-size: 15px;
+        -webkit-line-clamp: 2;
+    }
+}
+
+
+/* ============================================================
+   DESKTOP LARGE (> 1200px)
+   ============================================================ */
+
+@media (min-width: 1200px) {
+    .dib-bento-unified__grid {
+        grid-auto-rows: 180px;
+    }
+
+    .dib-bento-item--hero .dib-bento-item__title {
+        font-size: 32px;
+    }
+
+    .dib-bento-item--medium .dib-bento-item__title {
+        font-size: 24px;
+    }
+
+    .dib-flash-bento--featured .dib-flash-bento__title {
+        font-size: 26px;
+    }
+}
+
+
+/* ============================================================
+   ACCESSIBILITÀ & PERFORMANCE
+   ============================================================ */
+
+@media (prefers-reduced-motion: reduce) {
+    .dib-bento-item,
+    .dib-flash-bento,
+    .dib-bento-item__bg,
+    .dib-flash-bento__bg,
+    .dib-zona2-bento__dot,
+    .dib-flash-bento__badge {
+        transition: none;
+        animation: none;
+    }
+}
+
+.dib-bento-item:focus,
+.dib-flash-bento:focus {
+    outline: 3px solid #2196f3;
+    outline-offset: 4px;
+}
+
+/* Dark mode support (opzionale) */
+@media (prefers-color-scheme: dark) {
+    .dib-zona1-bento {
+        background: transparent;
+    }
+}
+
+
+/* ============================================================
+   SEZIONE PRIMO PIANO — Griglia Verticale 9:16
+   ============================================================ */
+
+.dib-primopiano {
+    padding: 60px 20px;
+    max-width: 1400px;
+    margin: 0 auto;
+    background: #fff;
+    box-sizing: border-box;
+}
+
+.dib-primopiano__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 32px;
+    padding: 0 4px;
+}
+
+.dib-primopiano__title {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.dib-primopiano__icon {
+    width: 36px;
+    height: 36px;
+    background: linear-gradient(135deg, #f5620f 0%, #ff7a33 100%);
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+}
+
+.dib-primopiano__title h2 {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    font-size: 24px;
+    font-weight: 800;
+    color: #0a1628;
+    margin: 0;
+}
+
+.dib-primopiano__more {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    color: #f5620f;
+    text-decoration: none;
+    transition: opacity 0.2s;
+}
+
+.dib-primopiano__more:hover {
+    opacity: 0.7;
+}
+
+/* Mobile: 1 colonna stack verticale */
+.dib-primopiano__grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 12px;
+    width: 100%;
+}
+
+.dib-pp-card {
+    position: relative;
+    border-radius: 16px;
+    overflow: hidden;
+    text-decoration: none;
+    height: 550px;
+    width: 100%;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.dib-pp-card:active {
+    transform: scale(0.98);
+}
+
+.dib-pp-card__bg {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, #0a1628 0%, #1a3a5c 100%);
+    background-size: cover;
+    background-position: center;
+    transition: transform 0.5s ease;
+}
+
+.dib-pp-card__overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(10, 22, 40, 0.95) 0%, rgba(10, 22, 40, 0.3) 60%, transparent 100%);
+    padding: 28px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    z-index: 1;
+}
+
+.dib-pp-card__top {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.dib-pp-card__badge {
+    background: rgba(245, 98, 15, 0.9);
+    backdrop-filter: blur(10px);
+    padding: 8px 14px;
+    border-radius: 20px;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    font-size: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: #fff;
+}
+
+.dib-pp-card__bottom {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.dib-pp-card__title {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    font-size: 26px;
+    font-weight: 800;
+    line-height: 1.2;
+    color: #fff;
+    margin: 0;
+    display: -webkit-box;
+    -webkit-line-clamp: 4;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.dib-pp-card__meta {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    font-size: 13px;
+    font-weight: 500;
+    color: rgba(255, 255, 255, 0.8);
+}
+
+.dib-pp-card__meta span {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+/* Tablet: 2 colonne */
+@media (min-width: 768px) and (max-width: 1023px) {
+    .dib-primopiano__grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 16px;
+    }
+
+    .dib-pp-card {
+        height: 580px;
+    }
+}
+
+/* Desktop: 3 colonne affiancate */
+@media (min-width: 1024px) {
+    .dib-primopiano {
+        padding: 80px 20px;
+    }
+
+    .dib-primopiano__title h2 {
+        font-size: 28px;
+    }
+
+    .dib-primopiano__icon {
+        width: 40px;
+        height: 40px;
+        font-size: 22px;
+    }
+
+    .dib-primopiano__grid {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 24px;
+    }
+
+    .dib-pp-card {
+        height: 600px;
+    }
+
+    .dib-pp-card:hover {
+        transform: translateY(-6px);
+        box-shadow: 0 16px 48px rgba(10, 22, 40, 0.2);
+    }
+
+    .dib-pp-card:hover .dib-pp-card__bg {
+        transform: scale(1.05);
+    }
+
+    .dib-pp-card__overlay {
+        padding: 32px;
+    }
+
+    .dib-pp-card__title {
+        font-size: 28px;
+    }
+}
+
+/* Desktop Large */
+@media (min-width: 1200px) {
+    .dib-pp-card {
+        height: 650px;
+    }
+
+    .dib-pp-card__title {
+        font-size: 30px;
+    }
+}
+
