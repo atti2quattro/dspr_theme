@@ -917,9 +917,12 @@ function dspr_download_and_attach_image($image_url, $post_id, $title) {
 
     return $attachment_id;
 }
+
+
 // Funzione per recuperare news regionali da Adnkronos Campania
 function fetch_regional_news() {
     include_once(ABSPATH . WPINC . '/feed.php');
+    
     $rss_url = 'https://www.adnkronos.com/NewsFeed/RegCampania.xml?username=ildispariquotidiano&password=1ld8sp4ut6';
     
     $rss = fetch_feed($rss_url);
@@ -956,6 +959,7 @@ function fetch_regional_news() {
 // Funzione per recuperare news nazionali da Adnkronos
 function fetch_world_news() {
     include_once(ABSPATH . WPINC . '/feed.php');
+    
     $rss_url = 'https://www.adnkronos.com/NewsFeed/Ultimora.xml?username=ildispariquotidiano&password=1ld8sp4ut6';
     
     $rss = fetch_feed($rss_url);
@@ -987,4 +991,5 @@ function fetch_world_news() {
     }
     
     return $news;
+}
 }
