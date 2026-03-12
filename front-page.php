@@ -753,60 +753,57 @@ $si_grads = $flash_grads;
 
 
 <!-- ============================================================
-     SEZIONE 12a — IN REGIONE: Lista con foto
+     SEZIONE 12a � IN REGIONE: Feed RSS Adnkronos Campania
      ============================================================ -->
-<?php
-$q_regione = dspr_hp_query([
-    'category_name'  => 'in-regione',
-    'posts_per_page' => 5,
-]);
-if ( $q_regione->have_posts() ) :
-?>
+<?php $regional_news = fetch_regional_news(); ?>
+<?php if ( !empty($regional_news) ) : ?>
 <section class="dib-rassegna" data-section="regione" style="border-top:2px solid #e8e6e1;">
     <div class="dib-rassegna__header">
         <span class="dib-rassegna__tag" style="border-color:#0a1628;color:#0a1628;">In Regione</span>
-        <a class="dib-rassegna__more" href="<?php echo get_category_link( get_cat_ID('in-regione') ); ?>">Tutto →</a>
+        <span class="dib-rassegna__more">Adnkronos</span>
     </div>
     <div class="dib-rassegna__list">
-    <?php while ( $q_regione->have_posts() ) : $q_regione->the_post();
-        $rg_thumb = dspr_hp_thumb( get_the_ID(), 'ildispari-thumb' );
-        $rg_date  = get_the_date( 'j M' );
-    ?>
-        <a href="<?php the_permalink(); ?>" class="dib-rassegna__item">
-            <div class="dib-rassegna__item-img<?php echo $rg_thumb ? '' : ' dib-rassegna__item-img--empty'; ?>"<?php if ( $rg_thumb ) echo ' style="background-image:url(' . esc_url( $rg_thumb ) . ')"'; ?>></div>
+    <?php foreach ($regional_news as $news_item) : ?>
+        <a href="<?php echo esc_url($news_item['link']); ?>" target="_blank" rel="noopener" class="dib-rassegna__item">
+            <?php if (!empty($news_item['image'])) : ?>
+                <div class="dib-rassegna__item-img" style="background-image:url(<?php echo esc_url($news_item['image']); ?>)"></div>
+            <?php else : ?>
+                <div class="dib-rassegna__item-img dib-rassegna__item-img--empty"></div>
+            <?php endif; ?>
             <div class="dib-rassegna__item-body">
-                <div class="dib-rassegna__item-title"><?php the_title(); ?></div>
-                <span class="dib-rassegna__item-date"><?php echo $rg_date; ?></span>
+                <div class="dib-rassegna__item-title"><?php echo esc_html($news_item['title']); ?></div>
+                <span class="dib-rassegna__item-date"><?php echo esc_html($news_item['date']); ?></span>
             </div>
         </a>
-    <?php endwhile; wp_reset_postdata(); ?>
+    <?php endforeach; ?>
     </div>
 </section>
 <?php endif; ?>
 
-
 <!-- ============================================================
-     SEZIONE 12b — NEWS DAL MONDO: Solo titoli
+     SEZIONE 12b � NEWS DAL MONDO: Feed RSS Adnkronos Nazionale
      ============================================================ -->
-<?php
-$q_mondo = dspr_hp_query([
-    'category_name'  => 'news-mondo',
-    'posts_per_page' => 8,
-]);
-if ( $q_mondo->have_posts() ) :
-?>
+<?php $world_news = fetch_world_news(); ?>
+<?php if ( !empty($world_news) ) : ?>
 <section class="dib-rassegna" data-section="mondo" style="background:#f2f2f0;border-top:2px solid #e8e6e1;">
     <div class="dib-rassegna__header">
         <span class="dib-rassegna__tag" style="border-color:#0a1628;color:#0a1628;">News dal Mondo</span>
-        <a class="dib-rassegna__more" href="<?php echo get_category_link( get_cat_ID('news-mondo') ); ?>">Tutto →</a>
+        <span class="dib-rassegna__more">Adnkronos</span>
     </div>
-    <div class="dib-mondo__list">
-    <?php while ( $q_mondo->have_posts() ) : $q_mondo->the_post(); ?>
-        <a href="<?php the_permalink(); ?>" class="dib-mondo__item">
-            <span class="dib-mondo__bullet">—</span>
-            <div class="dib-mondo__title"><?php the_title(); ?></div>
+    <div class="dib-rassegna__list">
+    <?php foreach ($world_news as $news_item) : ?>
+        <a href="<?php echo esc_url($news_item['link']); ?>" target="_blank" rel="noopener" class="dib-rassegna__item">
+            <?php if (!empty($news_item['image'])) : ?>
+                <div class="dib-rassegna__item-img" style="background-image:url(<?php echo esc_url($news_item['image']); ?>)"></div>
+            <?php else : ?>
+                <div class="dib-rassegna__item-img dib-rassegna__item-img--empty"></div>
+            <?php endif; ?>
+            <div class="dib-rassegna__item-body">
+                <div class="dib-rassegna__item-title"><?php echo esc_html($news_item['title']); ?></div>
+                <span class="dib-rassegna__item-date"><?php echo esc_html($news_item['date']); ?></span>
+            </div>
         </a>
-    <?php endwhile; wp_reset_postdata(); ?>
+    <?php endforeach; ?>
     </div>
 </section>
 <?php endif; ?>
