@@ -917,3 +917,72 @@ function dspr_download_and_attach_image($image_url, $post_id, $title) {
 
     return $attachment_id;
 }
+// Funzione per recuperare news regionali da Adnkronos Campania
+function fetch_regional_news() {
+    $rss_url = 'https://www.adnkronos.com/NewsFeed/RegCampania.xml?username=ildispariquotidiano&password=1ld8sp4ut6';
+    
+    $rss = fetch_feed($rss_url);
+    
+    if (is_wp_error($rss)) {
+        return array();
+    }
+    
+    $maxitems = $rss->get_item_quantity(5);
+    $rss_items = $rss->get_items(0, $maxitems);
+    
+    $news = array();
+    foreach ($rss_items as $item) {
+        $image_url = '';
+        
+        // Estrai immagine da enclosure
+        $enclosure = $item->get_enclosure();
+        if ($enclosure && $enclosure->get_type() == 'image/jpeg') {
+            $image_url = $enclosure->get_link();
+        }
+        
+        $news[] = array(
+            'title' => $item->get_title(),
+            'link' => $item->get_permalink(),
+            'description' => $item->get_description(),
+            'date' => $item->get_date('j F Y'),
+            'image' => $image_url
+        );
+    }
+    
+    return $news;
+}
+
+// Funzione per recuperare news nazionali da Adnkronos
+function fetch_world_news() {
+    $rss_url = 'https://www.adnkronos.com/NewsFeed/Ultimora.xml?username=ildispariquotidiano&password=1ld8sp4ut6';
+    
+    $rss = fetch_feed($rss_url);
+    
+    if (is_wp_error($rss)) {
+        return array();
+    }
+    
+    $maxitems = $rss->get_item_quantity(5);
+    $rss_items = $rss->get_items(0, $maxitems);
+    
+    $news = array();
+    foreach ($rss_items as $item) {
+        $image_url = '';
+        
+        // Estrai immagine da enclosure
+        $enclosure = $item->get_enclosure();
+        if ($enclosure && $enclosure->get_type() == 'image/jpeg') {
+            $image_url = $enclosure->get_link();
+        }
+        
+        $news[] = array(
+            'title' => $item->get_title(),
+            'link' => $item->get_permalink(),
+            'description' => $item->get_description(),
+            'date' => $item->get_date('j F Y'),
+            'image' => $image_url
+        );
+    }
+    
+    return $news;
+}
